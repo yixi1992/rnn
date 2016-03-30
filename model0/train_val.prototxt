@@ -209,7 +209,7 @@ layers {
 }
 layers{
   name: 'loss'
-  type: SoftmaxWithLoss
+  type: SOFTMAX_LOSS
   bottom: 'pred'
   bottom: 'label'
   top: 'loss'
