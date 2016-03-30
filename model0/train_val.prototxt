@@ -3,7 +3,7 @@ name: 'TVG_CRF_RNN_COCO_VOC'
 force_backward: true
 layers{
   name: 'data'
-  type: 'Data'
+  type: 'DATA'
   top: 'data'
   include {
     phase: TRAIN
@@ -22,7 +22,7 @@ layers{
 }
 layers{
   name: 'label'
-  type: 'Data'
+  type: 'DATA'
   top: 'label'
   include {
     phase: TRAIN
@@ -35,7 +35,7 @@ layers{
 }
 layers{
   name: 'data'
-  type: 'Data'
+  type: 'DATA'
   top: 'data'
   include {
     phase: TEST
@@ -54,7 +54,7 @@ layers{
 }
 layers{
   name: 'label'
-  type: 'Data'
+  type: 'DATA'
   top: 'label'
   include {
     phase: TEST
@@ -210,7 +210,7 @@ layers {
 layers{
   name: 'loss'
   type: 'SoftmaxWithLoss'
-  bottom: 'score'
+  bottom: 'pred'
   bottom: 'label'
   top: 'loss'
   loss_param {
