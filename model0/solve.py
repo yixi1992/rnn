@@ -33,7 +33,7 @@ def interp_surgery(net, layers):
 # http://nbviewer.ipython.org/github/BVLC/caffe/blob/master/examples/net_surgery.ipynb
 # base_weights = 'vgg16fc.caffemodel'
 # base_weights = '../VGG16fc.caffemodel'
-MODEL_FILE = 'train_eval.prototxt'
+MODEL_FILE = 'train_val.prototxt'
 PRETRAINED = '/lustre/yixi/crfasrnn/model0/TVG_CRFRNN_COCO_VOC.caffemodel'
 
 # init
