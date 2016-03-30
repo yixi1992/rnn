@@ -1,7 +1,7 @@
 name: 'TVG_CRF_RNN_COCO_VOC'
 
 force_backward: true
-layer {
+layers{
   name: "data"
   type: "Data"
   top: "data"
@@ -20,7 +20,7 @@ layer {
     backend: LMDB
   }
 }
-layer {
+layers{
   name: "label"
   type: "Data"
   top: "label"
@@ -33,7 +33,7 @@ layer {
     backend: LMDB
   }
 }
-layer {
+layers{
   name: "data"
   type: "Data"
   top: "data"
@@ -52,7 +52,7 @@ layer {
     backend: LMDB
   }
 }
-layer {
+layers{
   name: "label"
   type: "Data"
   top: "label"
@@ -207,7 +207,7 @@ layers {
    bilateral_filter_weight: 5
   }
 }
-layer {
+layers{
   name: "loss"
   type: "SoftmaxWithLoss"
   bottom: "score"
