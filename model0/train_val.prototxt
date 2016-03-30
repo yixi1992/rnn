@@ -2,9 +2,9 @@ name: 'TVG_CRF_RNN_COCO_VOC'
 
 force_backward: true
 layers{
-  name: "data"
-  type: "Data"
-  top: "data"
+  name: 'data'
+  type: 'Data'
+  top: 'data'
   include {
     phase: TRAIN
   }
@@ -15,28 +15,28 @@ layers{
   	mean_value: 74.0029471198
   }
   data_param {
-    source: "../../face_segmentation_finetune/flow/camvid200200_lmdb/train-lmdb"
+    source: '../../face_segmentation_finetune/flow/camvid200200_lmdb/train-lmdb'
     batch_size: 1
     backend: LMDB
   }
 }
 layers{
-  name: "label"
-  type: "Data"
-  top: "label"
+  name: 'label'
+  type: 'Data'
+  top: 'label'
   include {
     phase: TRAIN
   }
   data_param {
-    source: "../../face_segmentation_finetune/flow/camvid200200_lmdb/train-label-lmdb"
+    source: '../../face_segmentation_finetune/flow/camvid200200_lmdb/train-label-lmdb'
     batch_size: 1
     backend: LMDB
   }
 }
 layers{
-  name: "data"
-  type: "Data"
-  top: "data"
+  name: 'data'
+  type: 'Data'
+  top: 'data'
   include {
     phase: TEST
   }
@@ -47,20 +47,20 @@ layers{
   	mean_value: 74.0029471198
   }
   data_param {
-    source: "../../face_segmentation_finetune/flow/camvid200200_lmdb/test-lmdb"
+    source: '../../face_segmentation_finetune/flow/camvid200200_lmdb/test-lmdb'
     batch_size: 1
     backend: LMDB
   }
 }
 layers{
-  name: "label"
-  type: "Data"
-  top: "label"
+  name: 'label'
+  type: 'Data'
+  top: 'label'
   include {
     phase: TEST
   }
   data_param {
-    source: "../../face_segmentation_finetune/flow/camvid200200_lmdb/test-label-lmdb"
+    source: '../../face_segmentation_finetune/flow/camvid200200_lmdb/test-label-lmdb'
     batch_size: 1
     backend: LMDB
   }
@@ -187,12 +187,12 @@ layers { type: SPLIT name: 'splitting'
 }
 
 layers {
-  name: "inference1"
+  name: 'inference1'
   type: MULTI_STAGE_MEANFIELD
-  bottom: "unary"
-  bottom: "Q0"
-  bottom: "data"
-  top: "pred"
+  bottom: 'unary'
+  bottom: 'Q0'
+  bottom: 'data'
+  top: 'pred'
   blobs_lr: 0.001
   blobs_lr: 0.001
   blobs_lr:0.01 #new parameter
@@ -208,11 +208,11 @@ layers {
   }
 }
 layers{
-  name: "loss"
-  type: "SoftmaxWithLoss"
-  bottom: "score"
-  bottom: "label"
-  top: "loss"
+  name: 'loss'
+  type: 'SoftmaxWithLoss'
+  bottom: 'score'
+  bottom: 'label'
+  top: 'loss'
   loss_param {
     normalize: false
   }
