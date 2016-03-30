@@ -148,3 +148,4 @@ DenseCRF library from Philipp Krahenbuhl and Vladlen Koltun. Efficient Inference
 NIPS 2011.
 
 For more information about CRF-RNN please vist the project website http://crfasrnn.torr.vision.
+# rnn
