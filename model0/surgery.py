@@ -7,26 +7,20 @@ import caffe
 
 
 # Load the fully convolutional network to transplant the parameters.
-net_full_conv = caffe.Segmenter('deploy_surgery.prototxt', 
+net_full_conv = caffe.Net('deploy_surgery.prototxt', 
                           'TVG_CRFRNN_COCO_VOC.caffemodel')
 net_full_conv.set_phase_test()
-params_full_conv = ['score-fr-camvid', 'score-pool4-camvid', 'score-pool3-camvid']
-for pr in params_full_conv:
-	print pr, net_full_conv.params[pr][0].data.shape
-
+params_full_conv = ['score-fr-camvid', 'score-pool4-camvid', 'score-pool3-camvid', 'score2-camvid', 'score4-camvid', 'upsample-camvid']
 conv_params = {pr: (net_full_conv.params[pr][0].data, net_full_conv.params[pr][1].data) for pr in params_full_conv}
 for conv in params_full_conv:
 	print '{} weights are {} dimensional and biases are {} dimensional'.format(conv, conv_params[conv][0].shape, conv_params[conv][1].shape)
 
 
 # Load the original network and extract the fully connected layers' parameters.
-net = caffe.Segmenter('TVG_CRFRNN_COCO_VOC.prototxt', 
+net = caffe.net('TVG_CRFRNN_COCO_VOC.prototxt', 
                 'TVG_CRFRNN_COCO_VOC.caffemodel')
 net.set_phase_test()
-params = ['score-fr', 'score-pool4', 'score-pool3']
-for pr in params:
-	print pr, net.params[pr][0].data.shape
-
+params = ['score-fr', 'score-pool4', 'score-pool3', 'score2', 'score4', 'upsample']
 fc_params = {pr: (net.params[pr][0].data, net.params[pr][1].data) for pr in params}
 for fc in params:
 	print '{} weights are {} dimensional and biases are {} dimensional'.format(fc, fc_params[fc][0].shape, fc_params[fc][1].shape)
