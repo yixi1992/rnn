@@ -1,70 +1,11 @@
 name: 'TVG_CRF_RNN_COCO_VOC'
 
+input: 'data'
+input_dim: 1
+input_dim: 3
+input_dim: 200
+input_dim: 200
 force_backward: true
-layers{
-  name: 'data'
-  type: DATA
-  top: 'data'
-  include {
-    phase: TRAIN
-  }
- #  Camvid200 Mean
-  transform_param {
-  	mean_value: 78.1049806452
-  	mean_value: 76.5400646313
-  	mean_value: 74.0029471198
-  }
-  data_param {
-    source: '../../face_segmentation_finetune/flow/camvid200200_lmdb/train-lmdb'
-    batch_size: 1
-    backend: LMDB
-  }
-}
-layers{
-  name: 'label'
-  type: DATA
-  top: 'label'
-  include {
-    phase: TRAIN
-  }
-  data_param {
-    source: '../../face_segmentation_finetune/flow/camvid200200_lmdb/train-label-lmdb'
-    batch_size: 1
-    backend: LMDB
-  }
-}
-layers{
-  name: 'data'
-  type: DATA
-  top: 'data'
-  include {
-    phase: TEST
-  }
- #  Camvid200 Mean
-  transform_param {
-   	mean_value: 78.1049806452
-  	mean_value: 76.5400646313
-  	mean_value: 74.0029471198
-  }
-  data_param {
-    source: '../../face_segmentation_finetune/flow/camvid200200_lmdb/test-lmdb'
-    batch_size: 1
-    backend: LMDB
-  }
-}
-layers{
-  name: 'label'
-  type: DATA
-  top: 'label'
-  include {
-    phase: TEST
-  }
-  data_param {
-    source: '../../face_segmentation_finetune/flow/camvid200200_lmdb/test-label-lmdb'
-    batch_size: 1
-    backend: LMDB
-  }
-}
 
 layers { bottom: 'data' top: 'conv1_1' name: 'conv1_1' type: CONVOLUTION
   blobs_lr: 1 blobs_lr: 2 weight_decay: 1 weight_decay: 0
@@ -187,12 +128,12 @@ layers { type: SPLIT name: 'splitting'
 }
 
 layers {
-  name: 'inference1-camvid'
+  name: "inference1-camvid"
   type: MULTI_STAGE_MEANFIELD
-  bottom: 'unary'
-  bottom: 'Q0'
-  bottom: 'data'
-  top: 'pred'
+  bottom: "unary"
+  bottom: "Q0"
+  bottom: "data"
+  top: "pred"
   blobs_lr: 0.001
   blobs_lr: 0.001
   blobs_lr:0.01 #new parameter
@@ -207,14 +148,3 @@ layers {
    bilateral_filter_weight: 5
   }
 }
-layers{
-  name: 'loss'
-  type: SOFTMAX_LOSS
-  bottom: 'pred'
-  bottom: 'label'
-  top: 'loss'
-  loss_param {
-    normalize: false
-  }
-}
-
