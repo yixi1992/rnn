@@ -35,15 +35,19 @@ def interp_surgery(net, layers):
 # base_weights = '../VGG16fc.caffemodel'
 MODEL_FILE = 'train_val.prototxt'
 PRETRAINED = '/lustre/yixi/crfasrnn/model0/TVG_CRFRNN_COCO_VOCfc.caffemodel'
+#PRETRAINED = '/lustre/yixi/crfasrnn/model0/snapshots_camvid200200/train_lr1e-9/_iter_1000.caffemodel'
+#PRETRAINED = '/lustre/yixi/crfasrnn/model0/snapshots_camvid200200/train_lr1e-9/_iter_5000.caffemodel'
+
 
 # init
-caffe.Segmenter(MODEL_FILE, PRETRAINED, gpu=False)
+#caffe.Segmenter(MODEL_FILE, PRETRAINED, gpu=False)
 
 solver = caffe.SGDSolver('solver.prototxt')
+solver.net.copy_from(PRETRAINED)
 
 # do net surgery to set the deconvolution weights for bilinear interpolation
-interp_layers = [k for k in solver.net.params.keys() if ('score2' in k) or ('score4' in k) or ('upsample' in k)]
-interp_surgery(solver.net, interp_layers)
+#interp_layers = [k for k in solver.net.params.keys() if ('score2' in k) or ('score4' in k) or ('upsample' in k)]
+#interp_surgery(solver.net, interp_layers)
 
 
 # solve straight through -- a better approach is to define a solving loop to
