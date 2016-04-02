@@ -1,18 +1,21 @@
 # Make sure that caffe is on the python path:
+
 caffe_root = './caffe'  # this file is expected to be in {caffe_root}/examples
 import sys
 sys.path.insert(0, caffe_root + 'python')
-
 import caffe
-
-net = caffe.Net('modeldefault_deploy.prototxt', 
-                '/lustre/yixi/face_segmentation_finetune/flow/modeldefault/snapshots_camvid200200/train_lr1e-10/_iter_77000.caffemodel')
-net.set_phase_test()
-
-
 net_full_conv = caffe.Net('deploy.prototxt', 
                           '/lustre/yixi/face_segmentation_finetune/flow/modeldefault/snapshots_camvid200200/train_lr1e-10/_iter_77000.caffemodel')
 net_full_conv.set_phase_test()
+
+
+caffe_root = './caffe-future'  # this file is expected to be in {caffe_root}/examples
+import sys
+sys.path.insert(0, caffe_root + 'python')
+import caffe
+net = caffe.Net('modeldefault_deploy_ori.prototxt', 
+                '/lustre/yixi/face_segmentation_finetune/flow/modeldefault/snapshots_camvid200200/train_lr1e-10/_iter_77000.caffemodel', caffe.TEST)
+#net.set_phase_test()
 
 
 
